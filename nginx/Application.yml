@@ -4,14 +4,15 @@ metadata:
   name: nginx3
   namespace: argocd
 spec:
-  project: default
-  source:
-    repoURL: https://your.repo.git  # 替换为你的 Git 仓库地址
-    targetRevision: HEAD
-    path: app/dev
   destination:
-    server: https://kubernetes.default.svc
     namespace: default
+    server: https://kubernetes.default.svc
+  source:
+    path: nginx/dev
+    repoURL: https://github.com/w564791/argo-test.git
+    targetRevision: main
+  sources: []
+  project: default
   syncPolicy:
     automated:
       prune: true
