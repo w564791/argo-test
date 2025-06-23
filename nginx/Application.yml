@@ -11,7 +11,6 @@ spec:
     path: nginx/dev
     repoURL: https://github.com/w564791/argo-test.git
     targetRevision: main
-  sources: []
   project: default
   syncPolicy:
     automated:
