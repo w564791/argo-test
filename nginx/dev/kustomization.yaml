@@ -1,0 +1,5 @@
+resources:
+  - ../base/deployment.yaml
+
+patches:
+  - path: env-config.yaml
