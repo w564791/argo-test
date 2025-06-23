@@ -6,7 +6,7 @@ spec:
   template:
     spec:
       containers:
-        - name: nginx3
+        - name: nginx
           env:
             - name: envName
               value: dev
