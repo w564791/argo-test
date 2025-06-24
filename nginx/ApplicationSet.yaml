@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: nginx-muti
+spec:
+  generators:
+    - clusters:
+        selector:
+          matchLabels:
+            managed-by: ken
+  template:
+    metadata:
+      name: 'nginx'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/w564791/argo-test.git
+        path: nginx/dev
+        targetRevision: main
+      destination:
+        server: '{{server}}'
+        namespace: argo-cd
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+      syncOptions:
+        - CreateNamespace=true
+        - ServerSideApply=true
