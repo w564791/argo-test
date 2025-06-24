@@ -5,6 +5,8 @@ patches:
   - path: env-config.yaml
 patchesStrategicMerge:
   - init-echo-container.yaml
+
+
 replacements:
   - source:
       kind: ConfigMap
@@ -14,11 +16,10 @@ replacements:
       - select:
           kind: Deployment
         fieldPaths:
-          - spec.template.spec.containers.[name=nginx].env.[name=K8S_CLUSTER_NAME].value
+          - spec.template.spec.containers.all.env.[name=K8S_CLUSTER_NAME].value
         options:
           create: true
-
 configMapGenerator:
   - name: cluster-config
     literals:
-      - CLUSTER_NAME=PLACEHOLDER_VALUE
+      - CLUSTER_NAME=default-cluster  # 默认值

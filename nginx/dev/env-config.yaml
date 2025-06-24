@@ -10,3 +10,5 @@ spec:
           env:
             - name: envName
               value: dev
+            - name: K8S_CLUSTER_NAME
+              value: ""
