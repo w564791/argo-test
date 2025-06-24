@@ -7,6 +7,6 @@ spec:
     spec:
       initContainers:
         - name: echo-init
-          image: hashicorp/echo
+          image: hashicorp/http-echo:latest
           command: ["sleep"]
           args: ["5"]
