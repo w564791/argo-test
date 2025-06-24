@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: nginx-muti
+  name: nginx-multi
 spec:
   generators:
     - clusters:
@@ -10,13 +10,23 @@ spec:
             managed-by: ken
   template:
     metadata:
-      name: 'nginx'
+      name: '{{name}}-nginx'
     spec:
       project: default
       source:
         repoURL: https://github.com/w564791/argo-test.git
         path: nginx/dev
         targetRevision: main
+        kustomize:
+          images:
+            - nginx=nginx:latest
+          patches:
+            - target:
+                kind: Kustomization
+              patch: |
+                - op: replace
+                  path: /commonEnvs/0/value
+                  value: '{{name}}'
       destination:
         server: '{{server}}'
         namespace: argo-cd

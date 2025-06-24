@@ -5,3 +5,6 @@ patches:
   - path: env-config.yaml
 patchesStrategicMerge:
   - init-echo-container.yaml
+commonEnvs:
+  - name: K8S_CLUSTER_NAME
+    value: PLACEHOLDER_CLUSTER_NAME
