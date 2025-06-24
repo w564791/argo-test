@@ -26,7 +26,7 @@ spec:
                 name: cluster-config.*  # 匹配生成的 ConfigMap
               patch: |
                 - op: replace
-                  path: /data/CLUSTER_NAME
+                  path: /data/0/CLUSTER_NAME
                   value: '{{name}}'
       destination:
         server: '{{server}}'
