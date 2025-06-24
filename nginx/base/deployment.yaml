@@ -25,6 +25,7 @@ spec:
         - name: app_id
           value: nginx
         imagePullPolicy: Always
+        image: "" 
         resources: {}
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
