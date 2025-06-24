@@ -21,6 +21,9 @@ spec:
     spec:
       containers:
       - name: nginx
+        env:
+        - name: app_id
+          value: nginx
         imagePullPolicy: Always
         resources: {}
         terminationMessagePath: /dev/termination-log
