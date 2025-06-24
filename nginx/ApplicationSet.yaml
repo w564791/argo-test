@@ -22,10 +22,11 @@ spec:
             - nginx=nginx:latest
           patches:
             - target:
-                kind: Kustomization
+                kind: ConfigMap
+                name: cluster-config.*  # 匹配生成的 ConfigMap
               patch: |
                 - op: replace
-                  path: /commonEnvs/0/value
+                  path: /data/CLUSTER_NAME
                   value: '{{name}}'
       destination:
         server: '{{server}}'
