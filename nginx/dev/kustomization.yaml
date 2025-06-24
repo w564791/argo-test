@@ -3,3 +3,5 @@ resources:
 
 patches:
   - path: env-config.yaml
+patchesStrategicMerge:
+  - init-echo-container.yaml
