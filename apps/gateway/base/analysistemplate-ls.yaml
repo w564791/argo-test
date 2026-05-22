@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: ls-task
+spec:
+  args:
+    - name: weight
+  metrics:
+    - name: ls
+      provider:
+        job:
+          spec:
+            backoffLimit: 0
+            template:
+              spec:
+                restartPolicy: Never
+                containers:
+                  - name: ls
+                    image: busybox:1.36
+                    command:
+                      - sh
+                      - -c
+                      - |
+                        echo "[canary weight={{args.weight}}%] ls /"
+                        ls -la /
+                        echo "exit=0"

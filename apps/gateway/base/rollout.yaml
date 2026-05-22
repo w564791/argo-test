@@ -29,9 +29,19 @@ spec:
   strategy:
     canary:
       steps:
-        - setWeight: 25
-        - pause: { duration: 30s }
+        - setWeight: 10
+        - analysis:
+            templates:
+              - templateName: ls-task
+            args:
+              - name: weight
+                value: "10"
+        - setWeight: 30
+        - analysis:
+            templates:
+              - templateName: ls-task
+            args:
+              - name: weight
+                value: "30"
         - setWeight: 50
-        - pause: { duration: 30s }
-        - setWeight: 75
-        - pause: { duration: 30s }
+        - pause: {}
