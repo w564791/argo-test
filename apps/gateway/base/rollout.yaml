@@ -18,6 +18,7 @@ spec:
           image: nginx:1.25
           ports:
             - containerPort: 80
+              protocol: TCP
           resources:
             requests:
               cpu: 10m
