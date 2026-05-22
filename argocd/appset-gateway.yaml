@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: gateway
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - list:
+        elements:
+          - clusterName: kind-argo-sub-cluster-1
+            server: https://argo-sub-cluster-1-control-plane:6443
+            overlay: sub-1
+          - clusterName: kind-argo-sub-cluster-2
+            server: https://argo-sub-cluster-2-control-plane:6443
+            overlay: sub-2
+          - clusterName: kind-argo-sub-cluster-3
+            server: https://argo-sub-cluster-3-control-plane:6443
+            overlay: sub-3
+  template:
+    metadata:
+      name: 'gateway-{{.overlay}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/w564791/argo-test.git
+        targetRevision: main
+        path: 'apps/gateway/overlays/{{.overlay}}'
+      destination:
+        server: '{{.server}}'
+        namespace: gateway
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - ServerSideApply=true

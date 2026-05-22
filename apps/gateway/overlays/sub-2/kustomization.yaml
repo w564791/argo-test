@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../base
+patches:
+  - target:
+      kind: Rollout
+      name: gateway
+    patch: |
+      - op: replace
+        path: /spec/replicas
+        value: 2
+      - op: add
+        path: /spec/template/spec/containers/0/env
+        value:
+          - name: CLUSTER_NAME
+            value: kind-argo-sub-cluster-2
